@@ -1,48 +1,4 @@
-import React, { useState } from 'react';
-
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    try {
-      const response = await fetch('https://formsubmit.co/harryallen.net@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          _subject: `New Portfolio Contact from ${formData.name}`,
-          _captcha: 'false'
-        })
-      });
-      
-      if (response.ok) {
-        alert('Thank you for your message! I will get back to you soon.');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        alert('Something went wrong. Please try emailing me directly.');
-      }
-    } catch (error) {
-      alert('Something went wrong. Please try emailing me directly.');
-    }
-  };
-
   return (
     <section id="contact" className="min-h-full flex items-center py-8 px-4 pb-24">
       <div className="max-w-4xl mx-auto w-full">
@@ -126,7 +82,12 @@ const Contact = () => {
           
           {/* Contact Form */}
           <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form action="https://formsubmit.co/harryallen.net@gmail.com" method="POST" className="space-y-4">
+              {/* FormSubmit Configuration */}
+              <input type="hidden" name="_subject" value="New Portfolio Contact Message" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              
               <div>
                 <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
                   Name
@@ -135,8 +96,6 @@ const Contact = () => {
                   type="text"
                   id="name"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
                   required
                   className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:border-navy-900 focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300"
                   placeholder="Your name"
@@ -151,8 +110,6 @@ const Contact = () => {
                   type="email"
                   id="email"
                   name="email"
-                  value={formData.email}
-                  onChange={handleChange}
                   required
                   className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:border-navy-900 focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300"
                   placeholder="your.email@example.com"
@@ -166,8 +123,6 @@ const Contact = () => {
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   required
                   rows="5"
                   className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:border-navy-900 focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 resize-none"
