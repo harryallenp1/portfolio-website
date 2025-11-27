@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const FloatingSkills = ({ isSkillsPage, isIntroPage }) => {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [permissionGranted, setPermissionGranted] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
+  const skillRefs = useRef([]);
 
   const skills = [
     { name: 'Python', color: 'bg-blue-500', icon: '🐍' },
@@ -19,63 +19,48 @@ const FloatingSkills = ({ isSkillsPage, isIntroPage }) => {
     { name: 'JIRA', color: 'bg-blue-500', icon: '📋' },
   ];
 
-  // Generate random positions for each skill
+  // Generate random static positions for each skill
   const [skillPositions] = useState(() =>
-    skills.map((_, index) => ({
-      x: Math.random() * 80 + 10, // 10-90% of screen width
-      y: Math.random() * 80 + 10, // 10-90% of screen height
-      delay: index * 0.1,
-      speed: 0.5 + Math.random() * 0.5, // Random speed multiplier
+    skills.map(() => ({
+      x: Math.random() * 70 + 15, // 15-85% of screen width
+      y: Math.random() * 70 + 15, // 15-85% of screen height
     }))
   );
 
-  // Handle device orientation (mobile tilt)
+  // Track mouse position
   useEffect(() => {
-    const handleOrientation = (event) => {
-      if (permissionGranted) {
-        // beta: front-to-back tilt (-180 to 180)
-        // gamma: left-to-right tilt (-90 to 90)
-        const x = event.gamma ? event.gamma / 45 : 0; // Normalize to -2 to 2
-        const y = event.beta ? (event.beta - 45) / 45 : 0; // Normalize and center
-        setTilt({ x: Math.max(-2, Math.min(2, x)), y: Math.max(-2, Math.min(2, y)) });
-      }
-    };
-
-    // Handle mouse movement (desktop fallback)
     const handleMouseMove = (event) => {
-      if (!permissionGranted) {
-        const x = (event.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
-        const y = (event.clientY / window.innerHeight - 0.5) * 2; // -1 to 1
-        setTilt({ x, y });
-      }
+      setMousePos({ x: event.clientX, y: event.clientY });
     };
 
-    // Request permission for iOS 13+
-    const requestPermission = async () => {
-      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-        try {
-          const permission = await DeviceOrientationEvent.requestPermission();
-          if (permission === 'granted') {
-            setPermissionGranted(true);
-          }
-        } catch (error) {
-          console.log('Permission denied');
-        }
-      } else if (window.DeviceOrientationEvent) {
-        // Non-iOS devices
-        setPermissionGranted(true);
-      }
-    };
-
-    requestPermission();
-    window.addEventListener('deviceorientation', handleOrientation);
     window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
-    return () => {
-      window.removeEventListener('deviceorientation', handleOrientation);
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [permissionGranted]);
+  // Calculate repulsion from cursor
+  const calculateRepulsion = (skillX, skillY) => {
+    if (isSkillsPage) return { x: 0, y: 0 };
+
+    const skillPosX = (skillX / 100) * window.innerWidth;
+    const skillPosY = (skillY / 100) * window.innerHeight;
+    
+    const dx = skillPosX - mousePos.x;
+    const dy = skillPosY - mousePos.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+    const repelDistance = 150; // Distance at which repulsion starts
+    
+    if (distance < repelDistance && distance > 0) {
+      const force = (repelDistance - distance) / repelDistance;
+      const angle = Math.atan2(dy, dx);
+      return {
+        x: Math.cos(angle) * force * 50,
+        y: Math.sin(angle) * force * 50,
+      };
+    }
+    
+    return { x: 0, y: 0 };
+  };
 
   // Don't show on intro page
   if (isIntroPage) return null;
@@ -84,35 +69,32 @@ const FloatingSkills = ({ isSkillsPage, isIntroPage }) => {
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {skills.map((skill, index) => {
         const pos = skillPositions[index];
+        const repulsion = calculateRepulsion(pos.x, pos.y);
         
-        // Calculate movement based on tilt
-        const moveX = isSkillsPage ? 0 : tilt.x * 20 * pos.speed;
-        const moveY = isSkillsPage ? 0 : tilt.y * 20 * pos.speed;
-        
-        // On skills page, move to grid position (we'll calculate this)
-        const gridCol = index % 4;
-        const gridRow = Math.floor(index / 4);
-        const targetX = isSkillsPage ? 20 + gridCol * 20 : pos.x;
-        const targetY = isSkillsPage ? 30 + gridRow * 15 : pos.y;
+        // On skills page, calculate target position in the actual Skills section
+        // We'll hide them and let the real Skills component show
+        const targetX = isSkillsPage ? 50 : pos.x;
+        const targetY = isSkillsPage ? 50 : pos.y;
 
         return (
           <div
             key={index}
-            className={`absolute transition-all duration-1000 ease-out ${
-              isSkillsPage ? 'opacity-0' : 'opacity-30'
+            ref={(el) => (skillRefs.current[index] = el)}
+            className={`absolute transition-all duration-700 ease-out ${
+              isSkillsPage ? 'opacity-0 scale-150' : 'opacity-40'
             }`}
             style={{
               left: `${targetX}%`,
               top: `${targetY}%`,
-              transform: `translate(${moveX}px, ${moveY}px) translate(-50%, -50%)`,
-              transitionDelay: `${pos.delay}s`,
+              transform: `translate(calc(-50% + ${repulsion.x}px), calc(-50% + ${repulsion.y}px))`,
+              transitionProperty: isSkillsPage ? 'all' : 'transform',
+              transitionDuration: isSkillsPage ? '1000ms' : '200ms',
             }}
           >
             <div
               className={`${skill.color} text-white px-4 py-2 rounded-full font-semibold shadow-lg backdrop-blur-sm flex items-center gap-2 text-sm`}
               style={{
-                opacity: 0.6,
-                filter: 'blur(1px)',
+                filter: 'blur(0.5px)',
               }}
             >
               <span className="text-lg">{skill.icon}</span>
