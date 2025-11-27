@@ -43,25 +43,44 @@ const Journey = () => {
     }
   ];
 
-  // Animate through steps when visible
+  // Highlight steps based on scroll position
   useEffect(() => {
-    if (isVisible) {
-      const timeouts = [];
-      milestones.forEach((_, index) => {
-        const timeout = setTimeout(() => {
-          setActiveStep(index);
-        }, index * 1500); // 1.5 seconds per step
-        timeouts.push(timeout);
-      });
+    const handleScroll = () => {
+      const section = document.getElementById('journey');
+      if (!section) return;
+
+      const sectionRect = section.getBoundingClientRect();
+      const sectionTop = sectionRect.top;
+      const sectionHeight = sectionRect.height;
+      const windowHeight = window.innerHeight;
+
+      // Only activate when section is in view
+      if (sectionTop > windowHeight || sectionTop + sectionHeight < 0) {
+        setActiveStep(-1);
+        return;
+      }
+
+      // Start highlighting only after scrolling into the section
+      // When section top is at navbar (64px from top), start from first item
+      const navbarHeight = 64;
+      const scrolledPastTop = Math.max(0, navbarHeight - sectionTop);
+      const scrollProgress = scrolledPastTop / sectionHeight;
       
-      return () => {
-        timeouts.forEach(timeout => clearTimeout(timeout));
-      };
-    } else {
-      setActiveStep(-1);
+      // Calculate which step should be active based on scroll progress
+      // Use a slightly accelerated curve for later items
+      const adjustedProgress = scrollProgress + (scrollProgress * scrollProgress * 0.3);
+      const stepIndex = Math.floor(adjustedProgress * milestones.length);
+      setActiveStep(Math.min(Math.max(-1, stepIndex), milestones.length - 1));
+    };
+
+    const scrollContainer = document.getElementById('scroll-container');
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll(); // Initial check
+      
+      return () => scrollContainer.removeEventListener('scroll', handleScroll);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVisible]);
+  }, [milestones.length]);
 
   return (
     <section id="journey" className="min-h-full flex items-center py-8 px-4 bg-white/30 dark:bg-gray-800/30" ref={ref}>

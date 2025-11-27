@@ -37,7 +37,18 @@ const About = () => {
                 Third-Year Computer Science Student
               </h3>
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                I'm a third-year Computer Science student specializing in <span className="font-semibold text-navy-900 dark:text-dark-accent">cloud computing</span>, <span className="font-semibold text-navy-900 dark:text-dark-accent">cybersecurity</span>, and <span className="font-semibold text-navy-900 dark:text-dark-accent">AI-driven systems</span>. I enjoy solving technical problems that sit at the intersection of scalability, security, and user impact.
+                I'm a third-year Computer Science student specializing in <span className="font-semibold text-navy-900 dark:text-dark-accent">cloud computing</span>, <span className="font-semibold text-navy-900 dark:text-dark-accent">cybersecurity</span>, and <span className="font-semibold text-navy-900 dark:text-dark-accent">AI-driven systems</span>. Originally from{' '}
+                <a 
+                  href="https://keralahouse.kerala.gov.in/about-the-state-of-kerala" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="relative group font-semibold text-navy-900 dark:text-dark-accent hover:underline cursor-pointer"
+                >
+                  Kerala
+                  <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-navy-900 dark:bg-dark-accent text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+                    Want to know more? 🌴
+                  </span>
+                </a>, India, I bring a global perspective to solving technical challenges that sit at the intersection of scalability, security, and user impact.
               </p>
             </div>
             

@@ -16,21 +16,21 @@ import Tutorial from './components/Tutorial';
 import ResumePage from './pages/ResumePage';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true); // Default to dark mode
   const [showIntro, setShowIntro] = useState(true);
   const [showTutorial, setShowTutorial] = useState(false);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   const HomePage = () => {
+    const [darkMode, setDarkMode] = useState(true); // Default to dark mode
     const [showNavbar, setShowNavbar] = useState(true);
     const lastScrollY = useRef(0);
+
+    useEffect(() => {
+      if (darkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }, [darkMode]);
 
     const handlePageChange = useCallback((sectionId) => {
       const element = document.getElementById(sectionId);
