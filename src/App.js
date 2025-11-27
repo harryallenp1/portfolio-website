@@ -118,12 +118,14 @@ function App() {
         
         <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
           <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 h-screen overflow-hidden">
-            <Navbar 
-              darkMode={darkMode} 
-              setDarkMode={setDarkMode} 
-              onNavigate={handlePageChange}
-              onLogoClick={() => setShowIntro(true)}
-            />
+            {!showIntro && (
+              <Navbar 
+                darkMode={darkMode} 
+                setDarkMode={setDarkMode} 
+                onNavigate={handlePageChange}
+                onLogoClick={() => setShowIntro(true)}
+              />
+            )}
           
           {/* Page Navigation Dots - Only show when not on intro */}
           {!showIntro && (
@@ -151,7 +153,7 @@ function App() {
             style={{
               transform: isTransitioning ? 'translateY(-100%)' : 'translateY(0)',
               opacity: isTransitioning ? 0 : 1,
-              paddingTop: '64px', // Space for navbar
+              paddingTop: showIntro ? '0' : '64px', // Space for navbar only when not on intro
             }}
           >
             {pages[currentPage].component}
