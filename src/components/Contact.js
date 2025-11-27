@@ -14,12 +14,33 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    
+    try {
+      const response = await fetch('https://formsubmit.co/harryallen.net@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `New Portfolio Contact from ${formData.name}`,
+          _captcha: 'false'
+        })
+      });
+      
+      if (response.ok) {
+        alert('Thank you for your message! I will get back to you soon.');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        alert('Something went wrong. Please try emailing me directly.');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try emailing me directly.');
+    }
   };
 
   return (
