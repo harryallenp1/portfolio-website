@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -19,7 +19,6 @@ function App() {
   const [darkMode, setDarkMode] = useState(true); // Default to dark mode
   const [showIntro, setShowIntro] = useState(true);
   const [showTutorial, setShowTutorial] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     if (darkMode) {
@@ -30,6 +29,8 @@ function App() {
   }, [darkMode]);
 
   const HomePage = () => {
+    const [showNavbar, setShowNavbar] = useState(true);
+    const lastScrollY = useRef(0);
 
     const handlePageChange = useCallback((sectionId) => {
       const element = document.getElementById(sectionId);
@@ -37,12 +38,16 @@ function App() {
       
       if (element && scrollContainer) {
         const elementPosition = element.offsetTop;
-        const offsetPosition = elementPosition - 80; // Account for navbar (64px) + some padding
+        const navbarHeight = 64; // Height of navbar
+        const offset = elementPosition - navbarHeight - 20; // Extra 20px padding
         
         scrollContainer.scrollTo({
-          top: offsetPosition,
+          top: Math.max(0, offset),
           behavior: 'smooth'
         });
+        
+        // Show navbar when navigating
+        setShowNavbar(true);
       }
     }, []);
 
@@ -57,7 +62,32 @@ function App() {
       { component: <Contact />, name: 'Contact', id: 'contact' },
     ];
 
+    // Track navbar visibility on scroll
+    useEffect(() => {
+      const handleScroll = () => {
+        const scrollContainer = document.getElementById('scroll-container');
+        if (!scrollContainer) return;
 
+        const currentScrollY = scrollContainer.scrollTop;
+        
+        // Show/hide navbar based on scroll direction
+        if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+          // Scrolling down
+          setShowNavbar(false);
+        } else if (currentScrollY < lastScrollY.current) {
+          // Scrolling up
+          setShowNavbar(true);
+        }
+        
+        lastScrollY.current = currentScrollY;
+      };
+
+      const scrollContainer = document.getElementById('scroll-container');
+      if (scrollContainer) {
+        scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+        return () => scrollContainer.removeEventListener('scroll', handleScroll);
+      }
+    }, []);
 
     return (
       <>
@@ -70,39 +100,24 @@ function App() {
         
         <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
           <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 h-screen overflow-hidden relative">
-            {!showIntro && (
+            <div 
+              className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
+                !showIntro && showNavbar ? 'translate-y-0' : '-translate-y-full'
+              }`}
+            >
               <Navbar 
                 darkMode={darkMode} 
                 setDarkMode={setDarkMode} 
                 onNavigate={handlePageChange}
                 onLogoClick={() => setShowIntro(true)}
               />
-            )}
-          
-          {/* Page Navigation Dots - Only show when not on intro */}
-          {!showIntro && (
-            <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 flex flex-col gap-3">
-              {pages.map((page, index) => (
-                <button
-                  key={index}
-                  onClick={() => handlePageChange(page.id)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    currentPage === index
-                      ? 'bg-navy-900 dark:bg-dark-accent scale-150'
-                      : 'bg-gray-400 dark:bg-gray-600 hover:bg-navy-600 dark:hover:bg-dark-secondary'
-                  }`}
-                  aria-label={`Go to ${page.name}`}
-                />
-              ))}
             </div>
-          )}
           
           {/* Scrollable Container */}
           <div 
             id="scroll-container"
             className="h-screen w-full overflow-y-auto overflow-x-hidden scroll-smooth"
             style={{
-              paddingTop: showIntro ? '0' : '64px',
               scrollBehavior: 'smooth',
             }}
           >
