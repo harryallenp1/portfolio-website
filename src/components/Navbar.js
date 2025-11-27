@@ -6,14 +6,14 @@ const Navbar = ({ darkMode, setDarkMode, onNavigate, onLogoClick }) => {
   const navigate = useNavigate();
 
   const navItems = [
-    { name: 'Home', page: 0 },
-    { name: 'About', page: 1 },
-    { name: 'Journey', page: 2 },
-    { name: 'Experience', page: 3 },
-    { name: 'Education', page: 4 },
-    { name: 'Projects', page: 5 },
-    { name: 'Skills', page: 6 },
-    { name: 'Contact', page: 7 },
+    { name: 'Home', id: 'hero' },
+    { name: 'About', id: 'about' },
+    { name: 'Journey', id: 'journey' },
+    { name: 'Experience', id: 'experience' },
+    { name: 'Education', id: 'education' },
+    { name: 'Projects', id: 'projects' },
+    { name: 'Skills', id: 'skills' },
+    { name: 'Contact', id: 'contact' },
   ];
 
   return (
@@ -35,7 +35,7 @@ const Navbar = ({ darkMode, setDarkMode, onNavigate, onLogoClick }) => {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => onNavigate && onNavigate(item.page)}
+                onClick={() => onNavigate && onNavigate(item.id)}
                 className="text-gray-700 dark:text-gray-300 hover:text-navy-900 dark:hover:text-navy-700 transition-colors duration-300 font-medium relative group"
               >
                 {item.name}
@@ -148,7 +148,7 @@ const Navbar = ({ darkMode, setDarkMode, onNavigate, onLogoClick }) => {
               <button
                 key={item.name}
                 onClick={() => {
-                  onNavigate && onNavigate(item.page);
+                  onNavigate && onNavigate(item.id);
                   setIsOpen(false);
                 }}
                 className="block w-full text-left px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"

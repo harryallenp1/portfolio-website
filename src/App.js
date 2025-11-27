@@ -13,7 +13,6 @@ import Footer from './components/Footer';
 import IntroPage from './components/IntroPage';
 import Chatbot from './components/Chatbot';
 import Tutorial from './components/Tutorial';
-import FloatingSkills from './components/FloatingSkills';
 import ResumePage from './pages/ResumePage';
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
   const [showIntro, setShowIntro] = useState(true);
   const [showTutorial, setShowTutorial] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     if (darkMode) {
@@ -33,80 +31,33 @@ function App() {
 
   const HomePage = () => {
 
-    const handlePageChange = useCallback((newPage) => {
-      if (isTransitioning || newPage === currentPage || newPage < 0 || newPage >= 8) {
-        return;
+    const handlePageChange = useCallback((sectionId) => {
+      const element = document.getElementById(sectionId);
+      const scrollContainer = document.getElementById('scroll-container');
+      
+      if (element && scrollContainer) {
+        const elementPosition = element.offsetTop;
+        const offsetPosition = elementPosition - 80; // Account for navbar (64px) + some padding
+        
+        scrollContainer.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
       }
-      
-      setIsTransitioning(true);
-      setCurrentPage(newPage);
-      
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 500);
-    }, [isTransitioning, currentPage]);
+    }, []);
 
     const pages = [
-      { component: <Hero onNavigate={handlePageChange} />, name: 'Hero' },
-      { component: <About />, name: 'About' },
-      { component: <Journey />, name: 'My Journey' },
-      { component: <Experience />, name: 'Experience' },
-      { component: <Education />, name: 'Education' },
-      { component: <Projects />, name: 'Projects' },
-      { component: <Skills />, name: 'Skills' },
-      { component: <Contact />, name: 'Contact' },
+      { component: <Hero onNavigate={handlePageChange} />, name: 'Hero', id: 'hero' },
+      { component: <About />, name: 'About', id: 'about' },
+      { component: <Journey />, name: 'My Journey', id: 'journey' },
+      { component: <Experience />, name: 'Experience', id: 'experience' },
+      { component: <Education />, name: 'Education', id: 'education' },
+      { component: <Projects />, name: 'Projects', id: 'projects' },
+      { component: <Skills />, name: 'Skills', id: 'skills' },
+      { component: <Contact />, name: 'Contact', id: 'contact' },
     ];
 
-    // Wheel event handler with scroll threshold
-    useEffect(() => {
-      let lastScrollTime = 0;
-      const SCROLL_THRESHOLD = 30; // Lower threshold for more responsive scrolling
-      
-      const handleWheel = (e) => {
-        const scrollIntensity = Math.abs(e.deltaY);
-        
-        // If scroll is gentle (below threshold), allow normal scrolling within page
-        if (scrollIntensity < SCROLL_THRESHOLD) {
-          return; // Don't prevent default, allow internal scrolling
-        }
-        
-        // Hard scroll detected - change page
-        e.preventDefault();
-        
-        const now = Date.now();
-        if (now - lastScrollTime < 600) return; // Reduced throttle for smoother feel
-        
-        lastScrollTime = now;
-        
-        if (e.deltaY > 0 && currentPage < pages.length - 1) {
-          handlePageChange(currentPage + 1);
-        } else if (e.deltaY < 0 && currentPage > 0) {
-          handlePageChange(currentPage - 1);
-        }
-      };
 
-      const handleKeyDown = (e) => {
-        if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-          e.preventDefault();
-          if (currentPage < pages.length - 1) {
-            handlePageChange(currentPage + 1);
-          }
-        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-          e.preventDefault();
-          if (currentPage > 0) {
-            handlePageChange(currentPage - 1);
-          }
-        }
-      };
-
-      window.addEventListener('wheel', handleWheel, { passive: false });
-      window.addEventListener('keydown', handleKeyDown);
-
-      return () => {
-        window.removeEventListener('wheel', handleWheel);
-        window.removeEventListener('keydown', handleKeyDown);
-      };
-    }, [currentPage, pages.length, handlePageChange]);
 
     return (
       <>
@@ -119,9 +70,6 @@ function App() {
         
         <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
           <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 h-screen overflow-hidden relative">
-            {/* Floating Skills Background */}
-            <FloatingSkills isSkillsPage={currentPage === 6} isIntroPage={showIntro} />
-            
             {!showIntro && (
               <Navbar 
                 darkMode={darkMode} 
@@ -137,8 +85,7 @@ function App() {
               {pages.map((page, index) => (
                 <button
                   key={index}
-                  onClick={() => handlePageChange(index)}
-                  disabled={isTransitioning}
+                  onClick={() => handlePageChange(page.id)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     currentPage === index
                       ? 'bg-navy-900 dark:bg-dark-accent scale-150'
@@ -150,25 +97,28 @@ function App() {
             </div>
           )}
           
-          {/* Current Page with Animation */}
+          {/* Scrollable Container */}
           <div 
-            key={currentPage} 
-            className="h-screen w-full absolute top-0 left-0 transition-all duration-700 ease-out overflow-y-auto relative z-10"
+            id="scroll-container"
+            className="h-screen w-full overflow-y-auto overflow-x-hidden scroll-smooth"
             style={{
-              transform: isTransitioning ? 'translateY(-100%)' : 'translateY(0)',
-              opacity: isTransitioning ? 0 : 1,
-              paddingTop: showIntro ? '0' : '64px', // Space for navbar only when not on intro
+              paddingTop: showIntro ? '0' : '64px',
+              scrollBehavior: 'smooth',
             }}
           >
-            {pages[currentPage].component}
+            {pages.map((page, index) => (
+              <section 
+                key={index} 
+                id={page.id}
+                className="min-h-screen w-full"
+              >
+                {page.component}
+              </section>
+            ))}
+            
+            {/* Footer */}
+            <Footer />
           </div>
-          
-          {/* Footer on last page */}
-          {currentPage === pages.length - 1 && (
-            <div className="absolute bottom-0 w-full">
-              <Footer />
-            </div>
-          )}
         </div>
         
         {/* AI Chatbot - Only show when not on intro */}

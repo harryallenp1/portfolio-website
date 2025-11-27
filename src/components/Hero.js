@@ -27,7 +27,7 @@ const Hero = ({ onNavigate }) => {
   }, []);
 
   return (
-    <section id="home" className="min-h-full flex items-center justify-center px-4 relative">
+    <section id="home" className="h-full flex items-center justify-center px-4 relative pt-36">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-navy-900/10 rounded-full blur-3xl animate-float"></div>
@@ -57,13 +57,13 @@ const Hero = ({ onNavigate }) => {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fadeInUp delay-400">
           <button
-            onClick={() => onNavigate && onNavigate(5)}
+            onClick={() => onNavigate && onNavigate('projects')}
             className="px-8 py-4 bg-gradient-to-r from-navy-900 to-navy-600 dark:from-dark-accent dark:to-dark-secondary text-white rounded-lg font-medium hover:shadow-2xl hover:scale-110 transition-all duration-300 w-full sm:w-auto hover-glow"
           >
             View My Work
           </button>
           <button
-            onClick={() => onNavigate && onNavigate(7)}
+            onClick={() => onNavigate && onNavigate('contact')}
             className="px-8 py-4 border-2 border-navy-900 dark:border-dark-accent text-navy-900 dark:text-dark-accent rounded-lg font-medium hover:bg-navy-900 dark:hover:bg-dark-accent hover:text-white transition-all duration-300 w-full sm:w-auto hover:scale-110"
           >
             Get In Touch
@@ -73,7 +73,7 @@ const Hero = ({ onNavigate }) => {
         {/* Scroll indicator */}
         <div className="mt-16 animate-bounce animate-fadeInUp delay-500">
           <button 
-            onClick={() => onNavigate && onNavigate(1)}
+            onClick={() => onNavigate && onNavigate('about')}
             className="text-gray-400 hover:text-navy-900 dark:hover:text-dark-accent transition-colors duration-300"
           >
             <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
