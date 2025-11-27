@@ -23,8 +23,8 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="min-h-full flex items-center py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+    <section id="contact" className="min-h-full flex items-center py-8 px-4 pb-24">
+      <div className="max-w-4xl mx-auto w-full">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-navy-900 to-navy-600 dark:from-dark-primary dark:to-dark-accent bg-clip-text text-transparent">
           Get In Touch
         </h2>
