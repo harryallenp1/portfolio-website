@@ -19,11 +19,11 @@ const FloatingSkills = ({ isSkillsPage, isIntroPage }) => {
     { name: 'JIRA', color: 'bg-blue-500', icon: '📋' },
   ];
 
-  // Generate random static positions for each skill
+  // Generate random static positions for each skill - at the bottom of screen
   const [skillPositions] = useState(() =>
     skills.map(() => ({
-      x: Math.random() * 70 + 15, // 15-85% of screen width
-      y: Math.random() * 70 + 15, // 15-85% of screen height
+      x: Math.random() * 80 + 10, // 10-90% of screen width
+      y: Math.random() * 15 + 80, // 80-95% of screen height (bottom area)
     }))
   );
 

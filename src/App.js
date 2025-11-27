@@ -60,7 +60,7 @@ function App() {
     // Wheel event handler with scroll threshold
     useEffect(() => {
       let lastScrollTime = 0;
-      const SCROLL_THRESHOLD = 50; // Minimum scroll intensity to trigger page change
+      const SCROLL_THRESHOLD = 30; // Lower threshold for more responsive scrolling
       
       const handleWheel = (e) => {
         const scrollIntensity = Math.abs(e.deltaY);
@@ -74,7 +74,7 @@ function App() {
         e.preventDefault();
         
         const now = Date.now();
-        if (now - lastScrollTime < 800) return; // Throttle page changes
+        if (now - lastScrollTime < 600) return; // Reduced throttle for smoother feel
         
         lastScrollTime = now;
         
@@ -153,7 +153,7 @@ function App() {
           {/* Current Page with Animation */}
           <div 
             key={currentPage} 
-            className="h-screen w-full absolute top-0 left-0 transition-all duration-500 ease-in-out overflow-y-auto relative z-10"
+            className="h-screen w-full absolute top-0 left-0 transition-all duration-700 ease-out overflow-y-auto relative z-10"
             style={{
               transform: isTransitioning ? 'translateY(-100%)' : 'translateY(0)',
               opacity: isTransitioning ? 0 : 1,
