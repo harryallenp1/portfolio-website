@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import IntroPage from './components/IntroPage';
 import Chatbot from './components/Chatbot';
 import Tutorial from './components/Tutorial';
+import FloatingSkills from './components/FloatingSkills';
 import ResumePage from './pages/ResumePage';
 
 function App() {
@@ -117,7 +118,10 @@ function App() {
         {showTutorial && <Tutorial onComplete={() => setShowTutorial(false)} />}
         
         <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 h-screen overflow-hidden">
+          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 h-screen overflow-hidden relative">
+            {/* Floating Skills Background */}
+            <FloatingSkills isSkillsPage={currentPage === 6} isIntroPage={showIntro} />
+            
             {!showIntro && (
               <Navbar 
                 darkMode={darkMode} 
@@ -149,7 +153,7 @@ function App() {
           {/* Current Page with Animation */}
           <div 
             key={currentPage} 
-            className="h-screen w-full absolute top-0 left-0 transition-all duration-500 ease-in-out overflow-y-auto"
+            className="h-screen w-full absolute top-0 left-0 transition-all duration-500 ease-in-out overflow-y-auto relative z-10"
             style={{
               transform: isTransitioning ? 'translateY(-100%)' : 'translateY(0)',
               opacity: isTransitioning ? 0 : 1,
