@@ -27,7 +27,7 @@ npm install
 npm start
 ```
 
-Visit `http://localhost:3000](https://harry-portfolio-website-omega-smoky-68.vercel.app/` to view the portfolio.
+Visit `https://harry-portfolio-website-omega-smoky-68.vercel.app/` to view the portfolio.
 
 ## 🏗️ Build
 
