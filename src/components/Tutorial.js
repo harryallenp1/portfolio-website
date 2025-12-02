@@ -24,12 +24,6 @@ const Tutorial = ({ onComplete }) => {
       highlight: 'darkmode'
     },
     {
-      title: 'Page Navigation Dots',
-      description: 'These dots on the right show your current page. Click any dot to jump to that section.',
-      position: 'right',
-      highlight: 'dots'
-    },
-    {
       title: 'Scroll to Navigate',
       description: 'Scroll up or down to move between pages. Each section has its own content.',
       position: 'center',
