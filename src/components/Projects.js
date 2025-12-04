@@ -44,9 +44,9 @@ const Projects = () => {
       image: '/projects/StudentNest.jpg',
       hasCustomImage: true,
       github: null,
-      demo: 'https://devpost.com/software/studentnest',
-      hackathon: true,
-      devpost: true
+      demo: null,
+      devpost: 'https://devpost.com/software/studentnest',
+      hackathon: true
     },
     {
       title: 'Aging Population Forecast',
