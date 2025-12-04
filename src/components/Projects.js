@@ -195,7 +195,20 @@ const Projects = () => {
                       Demo
                     </a>
                   )}
-                  {project.devpost && (
+                  {project.devpost && !project.demo && (
+                    <a
+                      href={project.devpost}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 min-w-[120px] px-4 py-2 bg-gradient-to-r from-navy-900 to-navy-600 dark:from-dark-accent dark:to-dark-secondary text-white rounded-lg text-center font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6.002 1.61L0 12.004L6.002 22.39h11.996L24 12.004L17.998 1.61H6.002zm1.593 4.084h3.947c3.605 0 6.276 1.695 6.276 6.31c0 4.436-3.21 6.302-6.456 6.302H7.595V5.694zm2.517 2.449v7.714h1.241c2.646 0 3.862-1.55 3.862-3.861c.009-2.569-1.096-3.853-3.767-3.853H10.112z"/>
+                      </svg>
+                      Devpost
+                    </a>
+                  )}
+                  {project.devpost && project.demo && (
                     <a
                       href={project.devpost}
                       target="_blank"
