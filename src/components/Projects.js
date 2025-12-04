@@ -5,6 +5,18 @@ const Projects = () => {
   const [ref, isVisible] = useScrollAnimation();
   const projects = [
     {
+      title: 'Spirit Interface',
+      date: 'December 2024 - Hackathon',
+      description: 'An interactive AI-powered ghost chat application with dynamic mood-based behavior, sentiment analysis, and atmospheric effects. Engineered a modular system with Mood Engine, Command Parser, Ghost Memory, and Glitch Effect Renderer using TypeScript and Next.js. Built with spec-driven development for consistent architecture.',
+      tech: ['TypeScript', 'Next.js', 'AI', 'Sentiment Analysis'],
+      image: '/projects/SpiritInterface.png',
+      hasCustomImage: true,
+      github: 'https://github.com/harryallenp1/frankenstein-spirit-communicator',
+      demo: 'https://www.youtube.com/watch?v=h2Hf0OVNc4g&t=10s',
+      devpost: 'https://devpost.com/software/spirit-interface',
+      hackathon: true
+    },
+    {
       title: 'AI Budget Tracker',
       date: 'September 2024',
       description: 'Developed an AI-assisted financial dashboard that automatically categorizes transactions and generates spending trends using Python automation. Improved reporting accuracy and reduced manual effort by automating monthly pipelines and designing KPI visualizations.',
@@ -176,22 +188,24 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className="flex-1 min-w-[120px] px-4 py-2 bg-gradient-to-r from-navy-900 to-navy-600 dark:from-dark-accent dark:to-dark-secondary text-white rounded-lg text-center font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
                     >
-                      {project.devpost ? (
-                        <>
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M6.002 1.61L0 12.004L6.002 22.39h11.996L24 12.004L17.998 1.61H6.002zm1.593 4.084h3.947c3.605 0 6.276 1.695 6.276 6.31c0 4.436-3.21 6.302-6.456 6.302H7.595V5.694zm2.517 2.449v7.714h1.241c2.646 0 3.862-1.55 3.862-3.861c.009-2.569-1.096-3.853-3.767-3.853H10.112z"/>
-                          </svg>
-                          Devpost
-                        </>
-                      ) : (
-                        <>
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          Demo
-                        </>
-                      )}
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Demo
+                    </a>
+                  )}
+                  {project.devpost && (
+                    <a
+                      href={project.devpost}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 min-w-[120px] px-4 py-2 border-2 border-navy-900 dark:border-dark-accent text-navy-900 dark:text-dark-accent rounded-lg text-center font-medium hover:bg-navy-900 dark:hover:bg-dark-accent hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6.002 1.61L0 12.004L6.002 22.39h11.996L24 12.004L17.998 1.61H6.002zm1.593 4.084h3.947c3.605 0 6.276 1.695 6.276 6.31c0 4.436-3.21 6.302-6.456 6.302H7.595V5.694zm2.517 2.449v7.714h1.241c2.646 0 3.862-1.55 3.862-3.861c.009-2.569-1.096-3.853-3.767-3.853H10.112z"/>
+                      </svg>
+                      Devpost
                     </a>
                   )}
                   {!project.github && !project.demo && (
