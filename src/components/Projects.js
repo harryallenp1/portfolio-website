@@ -9,7 +9,8 @@ const Projects = () => {
       date: 'September 2024',
       description: 'Developed an AI-assisted financial dashboard that automatically categorizes transactions and generates spending trends using Python automation. Improved reporting accuracy and reduced manual effort by automating monthly pipelines and designing KPI visualizations.',
       tech: ['Python', 'Power BI', 'Excel Automation', 'AI'],
-      image: '💰',
+      image: '/projects/AIBugetTracker.png',
+      hasCustomImage: true,
       github: 'https://github.com/harryallenp1/ai_budget_tracker',
       demo: 'https://www.youtube.com/watch?v=nLeJTOa5qwM'
     },
@@ -19,6 +20,7 @@ const Projects = () => {
       description: 'Designed and built an assistive mobile app that supports individuals with memory impairments using reminders, photo recognition, and voice-driven prompts. Developed cloud-enabled workflows using Firebase for real-time syncing and performed QA testing to ensure reliability.',
       tech: ['Flutter', 'Firebase', 'AI Analytics', 'Mobile Development'],
       image: '🧠',
+      hasCustomImage: false,
       github: 'https://github.com/harryallenp1/ProjectMemora',
       demo: null
     },
@@ -27,7 +29,8 @@ const Projects = () => {
       date: 'June 2024 - SpurHacks 2024',
       description: 'Built a prototype platform connecting international students with housing, jobs, and essential services through a cloud-integrated front end. Conducted user interviews and market analysis to refine product direction, validate user needs, and optimize usability.',
       tech: ['React', 'Firebase', 'Cloud APIs', 'UX Research'],
-      image: '🏠',
+      image: '/projects/StudentNest.jpg',
+      hasCustomImage: true,
       github: null,
       demo: 'https://devpost.com/software/studentnest',
       hackathon: true,
@@ -39,6 +42,7 @@ const Projects = () => {
       description: 'Built predictive models to forecast long-term population changes across Canada and assess resource demand under multiple scenarios. Designed comparative dashboards and visual summaries to support planning, analytics, and insight-driven decision-making.',
       tech: ['Python', 'Excel', 'Regression Modeling', 'Data Analytics'],
       image: '📈',
+      hasCustomImage: false,
       github: null,
       demo: null
     }
@@ -64,43 +68,58 @@ const Projects = () => {
             >
               {/* Project Image/Icon */}
               <div className="bg-gradient-to-br from-navy-900 to-navy-600 dark:from-dark-accent dark:to-dark-secondary h-48 flex items-center justify-center relative overflow-hidden group">
-                {/* Animated background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-navy-600 to-navy-900 dark:from-dark-secondary dark:to-dark-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Icon */}
-                <div className="relative z-10 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-                  {project.image === '📈' && (
-                    <svg className="w-32 h-32 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 8v8m-4-8v8m-4-8v8" />
-                    </svg>
-                  )}
-                  {project.image === '🧠' && (
-                    <svg className="w-32 h-32 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                    </svg>
-                  )}
-                  {project.image === '💰' && (
-                    <svg className="w-32 h-32 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  )}
-                  {project.image === '🏠' && (
-                    <svg className="w-32 h-32 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                  )}
-                </div>
-                
-                {/* Floating particles */}
-                <div className="absolute inset-0 opacity-30">
-                  <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white rounded-full animate-ping"></div>
-                  <div className="absolute top-3/4 right-1/4 w-2 h-2 bg-white rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
-                  <div className="absolute bottom-1/4 left-3/4 w-2 h-2 bg-white rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
-                </div>
+                {project.hasCustomImage ? (
+                  <>
+                    {/* Custom Image */}
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    {/* Overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-navy-900/80 to-navy-600/80 dark:from-dark-accent/80 dark:to-dark-secondary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </>
+                ) : (
+                  <>
+                    {/* Animated background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-navy-600 to-navy-900 dark:from-dark-secondary dark:to-dark-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    {/* Icon */}
+                    <div className="relative z-10 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                      {project.image === '📈' && (
+                        <svg className="w-32 h-32 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 8v8m-4-8v8m-4-8v8" />
+                        </svg>
+                      )}
+                      {project.image === '🧠' && (
+                        <svg className="w-32 h-32 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                      )}
+                      {project.image === '💰' && (
+                        <svg className="w-32 h-32 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      )}
+                      {project.image === '🏠' && (
+                        <svg className="w-32 h-32 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                      )}
+                    </div>
+                    
+                    {/* Floating particles */}
+                    <div className="absolute inset-0 opacity-30">
+                      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white rounded-full animate-ping"></div>
+                      <div className="absolute top-3/4 right-1/4 w-2 h-2 bg-white rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+                      <div className="absolute bottom-1/4 left-3/4 w-2 h-2 bg-white rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+                    </div>
+                  </>
+                )}
                 
                 {project.hackathon && (
-                  <div className="absolute top-4 right-4 px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full shadow-lg animate-bounce-slow">
+                  <div className="absolute top-4 right-4 px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full shadow-lg animate-bounce-slow z-20">
                     🏆 HACKATHON
                   </div>
                 )}
