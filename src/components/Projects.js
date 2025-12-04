@@ -221,7 +221,7 @@ const Projects = () => {
                       Devpost
                     </a>
                   )}
-                  {!project.github && !project.demo && (
+                  {!project.github && !project.demo && !project.devpost && (
                     <div className="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg text-center font-medium">
                       Private Project
                     </div>
