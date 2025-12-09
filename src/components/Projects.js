@@ -21,7 +21,7 @@ const Projects = () => {
       date: 'September 2024',
       description: 'Developed an AI-assisted financial dashboard that automatically categorizes transactions and generates spending trends using Python automation. Improved reporting accuracy and reduced manual effort by automating monthly pipelines and designing KPI visualizations.',
       tech: ['Python', 'Power BI', 'Excel Automation', 'AI'],
-      image: '/projects/AIBugetTracker.png',
+      image: '/projects/budget tracker.jpg',
       hasCustomImage: true,
       github: 'https://github.com/harryallenp1/ai_budget_tracker',
       demo: 'https://www.youtube.com/watch?v=nLeJTOa5qwM'
@@ -31,8 +31,8 @@ const Projects = () => {
       date: 'December 2024',
       description: 'Designed and built an assistive mobile app that supports individuals with memory impairments using reminders, photo recognition, and voice-driven prompts. Developed cloud-enabled workflows using Firebase for real-time syncing and performed QA testing to ensure reliability.',
       tech: ['Flutter', 'Firebase', 'AI Analytics', 'Mobile Development'],
-      image: '🧠',
-      hasCustomImage: false,
+      image: '/projects/memora.jpg',
+      hasCustomImage: true,
       github: 'https://github.com/harryallenp1/ProjectMemora',
       demo: null
     },
@@ -138,7 +138,7 @@ const Projects = () => {
               </div>
               
               {/* Project Content */}
-              <div className="p-6">
+              <div className="p-6 flex flex-col h-96">
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-2xl font-bold text-gray-800 dark:text-white flex-1">
                     {project.title}
@@ -150,7 +150,7 @@ const Projects = () => {
                   )}
                 </div>
                 
-                <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed flex-grow">
                   {project.description}
                 </p>
                 
@@ -167,13 +167,13 @@ const Projects = () => {
                 </div>
                 
                 {/* Links */}
-                <div className="flex gap-3 flex-wrap">
+                <div className="flex gap-3 mt-auto">
                   {project.github && (
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 min-w-[120px] px-4 py-2 border-2 border-navy-900 dark:border-dark-accent text-navy-900 dark:text-dark-accent rounded-lg text-center font-medium hover:bg-navy-900 dark:hover:bg-dark-accent hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                      className="flex-1 min-w-[120px] h-10 px-4 py-2 bg-black hover:bg-gray-800 text-white rounded-lg text-center font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
@@ -186,7 +186,7 @@ const Projects = () => {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 min-w-[120px] px-4 py-2 bg-gradient-to-r from-navy-900 to-navy-600 dark:from-dark-accent dark:to-dark-secondary text-white rounded-lg text-center font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+                      className="flex-1 min-w-[120px] h-10 px-4 py-2 bg-gradient-to-r from-navy-900 to-navy-600 dark:from-dark-accent dark:to-dark-secondary text-white rounded-lg text-center font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
@@ -200,7 +200,7 @@ const Projects = () => {
                       href={project.devpost}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 min-w-[120px] px-4 py-2 bg-gradient-to-r from-navy-900 to-navy-600 dark:from-dark-accent dark:to-dark-secondary text-white rounded-lg text-center font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+                      className="flex-1 min-w-[120px] h-10 px-4 py-2 bg-gradient-to-r from-navy-900 to-navy-600 dark:from-dark-accent dark:to-dark-secondary text-white rounded-lg text-center font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M6.002 1.61L0 12.004L6.002 22.39h11.996L24 12.004L17.998 1.61H6.002zm1.593 4.084h3.947c3.605 0 6.276 1.695 6.276 6.31c0 4.436-3.21 6.302-6.456 6.302H7.595V5.694zm2.517 2.449v7.714h1.241c2.646 0 3.862-1.55 3.862-3.861c.009-2.569-1.096-3.853-3.767-3.853H10.112z"/>
@@ -213,7 +213,7 @@ const Projects = () => {
                       href={project.devpost}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 min-w-[120px] px-4 py-2 border-2 border-navy-900 dark:border-dark-accent text-navy-900 dark:text-dark-accent rounded-lg text-center font-medium hover:bg-navy-900 dark:hover:bg-dark-accent hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                      className="flex-1 min-w-[120px] h-10 px-4 py-2 bg-gradient-to-r from-navy-900 to-navy-600 dark:from-dark-accent dark:to-dark-secondary text-white rounded-lg text-center font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M6.002 1.61L0 12.004L6.002 22.39h11.996L24 12.004L17.998 1.61H6.002zm1.593 4.084h3.947c3.605 0 6.276 1.695 6.276 6.31c0 4.436-3.21 6.302-6.456 6.302H7.595V5.694zm2.517 2.449v7.714h1.241c2.646 0 3.862-1.55 3.862-3.861c.009-2.569-1.096-3.853-3.767-3.853H10.112z"/>
@@ -222,7 +222,7 @@ const Projects = () => {
                     </a>
                   )}
                   {!project.github && !project.demo && !project.devpost && (
-                    <div className="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg text-center font-medium">
+                    <div className="flex-1 h-10 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg text-center font-medium flex items-center justify-center">
                       Private Project
                     </div>
                   )}
