@@ -81,6 +81,7 @@ const Tutorial = ({ onComplete }) => {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStep]);
 
   if (!isVisible) return null;

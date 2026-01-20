@@ -8,7 +8,7 @@ const Chatbot = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // System prompt with Harry's information
+  // eslint-disable-next-line no-unused-vars
   const systemPrompt = `You are Harry Allen's AI assistant on his portfolio website. Your role is to help visitors learn about Harry in a friendly, professional manner.
 
 ABOUT HARRY:

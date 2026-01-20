@@ -24,7 +24,7 @@ const Hero = ({ onNavigate }) => {
     }, typingDuration);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [titles.length]);
 
   return (
     <section id="home" className="h-full flex items-center justify-center px-4 relative pt-36">
