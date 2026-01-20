@@ -26,7 +26,7 @@ const ResumePage = () => {
               </h1>
             </div>
             <a
-              href="/Harry_ResumeA.pdf"
+              href="/Harry_ResSWE.pdf"
               download
               className="flex items-center gap-2 px-4 py-2 bg-white text-navy-900 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium"
             >
@@ -42,7 +42,7 @@ const ResumePage = () => {
       {/* PDF Viewer - Full Screen */}
       <div className="flex-1 w-full">
         <iframe
-          src="/Harry_ResumeA.pdf#zoom=88&toolbar=1&navpanes=0"
+          src="/Harry_ResSWE.pdf#zoom=88&toolbar=1&navpanes=0"
           className="w-full h-full border-0"
           title="Resume"
           style={{ minHeight: 'calc(100vh - 80px)' }}

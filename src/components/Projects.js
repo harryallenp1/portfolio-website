@@ -5,6 +5,18 @@ const Projects = () => {
   const [ref, isVisible] = useScrollAnimation();
   const projects = [
     {
+      title: 'AcciTaxi',
+      date: 'January 2026 - Hackathon',
+      description: 'An accessibility-first ride-hailing and rental platform addressing mobility barriers and inclusive employment in Canada. Features AI-powered text-to-speech/speech-to-text communication, crowd-sourced accessibility reporting, and AcciRentals for accessible vehicle rentals. Built with accessibility as the foundation, not an add-on.',
+      tech: ['React', 'Tailwind', 'MongoDB', 'Google Gemini API', 'Eleven Labs API', 'Leaflet.js'],
+      image: '/projects/AcciTaxi.png',
+      hasCustomImage: true,
+      github: 'https://github.com/harryallenp1/AcciTaxi',
+      demo: 'https://www.youtube.com/watch?v=H-lNhigdp_g',
+      devpost: 'https://devpost.com/software/accitaxi',
+      hackathon: true
+    },
+    {
       title: 'Spirit Interface',
       date: 'December 2024 - Hackathon',
       description: 'An interactive AI-powered ghost chat application with dynamic mood-based behavior, sentiment analysis, and atmospheric effects. Engineered a modular system with Mood Engine, Command Parser, Ghost Memory, and Glitch Effect Renderer using TypeScript and Next.js. Built with spec-driven development for consistent architecture.',

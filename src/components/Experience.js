@@ -3,7 +3,7 @@ import React from 'react';
 const Experience = () => {
   const experiences = [
     {
-      title: 'Software QA Analyst Intern',
+      title: 'Software Engineer - QA & Automation',
       company: 'Government of Ontario',
       companyUrl: 'https://www.ontario.ca/page/government-ontario',
       period: 'May 2023 – Present',
