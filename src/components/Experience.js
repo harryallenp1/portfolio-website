@@ -3,13 +3,29 @@ import React from 'react';
 const Experience = () => {
   const experiences = [
     {
-      title: 'Software Engineer - QA & Automation',
+      title: 'AI Automation Developer',
       company: 'Government of Ontario',
       companyUrl: 'https://www.ontario.ca/page/government-ontario',
-      period: 'May 2023 – Present',
+      period: 'January 2026 – Present',
       location: 'Toronto, ON',
       logo: '/logos/government_of_ontario_logo.jpeg',
       current: true,
+      description: 'Built and deployed workflow automations using n8n, containerized with Docker, to integrate and orchestrate internal government applications across multiple departments. Led consultative engagements with internal teams, identifying automation opportunities and translating business processes into scalable technical workflows.',
+      highlights: [
+        'Delivered automation solutions that helped 3 internal teams achieve 80% efficiency improvements by reducing manual handoffs, repetitive tasks, and processing time',
+        'Designed and implemented containerized automation workflows for cross-departmental integration',
+        'Conducted technical consultations to identify and prioritize high-impact automation opportunities'
+      ],
+      skills: ['n8n', 'Docker', 'Workflow Automation', 'API Integration', 'Process Optimization', 'Python', 'Technical Consulting', 'System Integration']
+    },
+    {
+      title: 'Software Engineer - QA & Automation',
+      company: 'Government of Ontario',
+      companyUrl: 'https://www.ontario.ca/page/government-ontario',
+      period: 'May 2023 – December 2025',
+      location: 'Toronto, ON',
+      logo: '/logos/government_of_ontario_logo.jpeg',
+      current: false,
       description: 'Analyze complex system behaviour and large datasets across cloud-hosted OACIS modules to support accurate reporting, workflow validation, and requirement alignment. Perform data-driven testing using SQL, defect tracking, and scenario analysis to ensure reliability of province-wide digital services supporting thousands of users.',
       highlights: [
         'Translate technical findings into clear, actionable insights for business teams',

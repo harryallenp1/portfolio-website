@@ -29,7 +29,7 @@ const IntroPage = ({ onEnter }) => {
         </p>
 
         <p className="text-lg md:text-xl text-gray-400 dark:text-gray-500 mb-12 max-w-2xl mx-auto">
-          Cloud Computing • Cybersecurity • AI Systems
+          AI Automation • DevOps • Cybersecurity
         </p>
 
         {/* Enter Button */}
