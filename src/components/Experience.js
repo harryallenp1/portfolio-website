@@ -22,7 +22,7 @@ const Experience = () => {
       title: 'Software Engineer - QA & Automation',
       company: 'Government of Ontario',
       companyUrl: 'https://www.ontario.ca/page/government-ontario',
-      period: 'May 2023 – December 2025',
+      period: 'May 2025 – December 2025',
       location: 'Toronto, ON',
       logo: '/logos/government_of_ontario_logo.jpeg',
       current: false,
@@ -38,7 +38,7 @@ const Experience = () => {
       title: 'Coding Instructor (iOS Development)',
       company: 'Career Education Council',
       companyUrl: 'https://www.careereducationcouncil.ca/',
-      period: 'June 2025 – Present',
+      period: 'June 2024 – May 2025',
       location: 'Guelph, ON',
       logo: '/logos/career_education_council_logo.jpeg',
       current: false,
@@ -147,7 +147,7 @@ const Experience = () => {
                 {exp.skills.map((skill, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1 bg-gradient-to-r from-navy-900 to-navy-600 dark:from-dark-accent dark:to-dark-secondary text-white text-sm rounded-full"
+                    className="px-3 py-1 bg-navy-700 dark:bg-navy-600 text-white text-sm rounded-full shadow-md"
                   >
                     {skill}
                   </span>
