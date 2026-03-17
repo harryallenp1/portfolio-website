@@ -15,6 +15,7 @@ import IntroPage from './components/IntroPage';
 import Chatbot from './components/Chatbot';
 import Tutorial from './components/Tutorial';
 import ResumePage from './pages/ResumePage';
+import MacBook3DExperience from './pages/MacBook3DExperience';
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -100,7 +101,7 @@ function App() {
         {showTutorial && <Tutorial onComplete={() => setShowTutorial(false)} />}
         
         <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 h-screen overflow-hidden relative">
+          <div className="portfolio-page bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 relative">
             <div 
               className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
                 !showIntro && showNavbar ? 'translate-y-0' : '-translate-y-full'
@@ -149,6 +150,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/resume" element={<ResumePage />} />
+        <Route path="/3d" element={<MacBook3DExperience />} />
+        <Route path="/test" element={<div style={{padding: '50px', fontSize: '30px', backgroundColor: 'red', color: 'white'}}>TEST ROUTE WORKS!</div>} />
       </Routes>
       <Analytics />
     </Router>
